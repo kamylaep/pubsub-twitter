@@ -23,12 +23,14 @@ public class PubSubEventPublisher {
   private List<ApiFuture<String>> futures;
 
   public PubSubEventPublisher(String projectId, String topicId) {
+    logger.debug("Creating publisher with projectId={} and topicId={}", projectId, topicId);
     publisher = buildPublisher(StringUtils.trim(projectId), StringUtils.trim(topicId));
     futures = new ArrayList<>();
     addShutdownHook();
   }
 
   public void send(String value) {
+    logger.trace("Publishing value={}", value);
     ByteString data = ByteString.copyFromUtf8(value);
     PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(data).build();
     futures.add(publisher.publish(pubsubMessage));

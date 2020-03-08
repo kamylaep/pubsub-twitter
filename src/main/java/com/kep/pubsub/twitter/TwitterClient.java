@@ -30,6 +30,7 @@ public class TwitterClient {
   private Client twitterClient;
 
   public TwitterClient(String... terms) {
+    logger.debug("Creating TwitterClient with terms={}", Arrays.toString(terms));
     msgQueue = new LinkedBlockingQueue<>(100000);
     twitterClient = buildTwitterClient(msgQueue, Arrays.asList(terms));
     addShutdownHook();
@@ -39,7 +40,9 @@ public class TwitterClient {
     twitterClient.connect();
     try {
       while (!twitterClient.isDone()) {
-        callback.accept(msgQueue.take());
+        String tweet = msgQueue.take();
+        logger.trace("Processing twee={}", tweet);
+        callback.accept(tweet);
       }
     } catch (InterruptedException e) {
       logger.error("Error fetching tweets", e);

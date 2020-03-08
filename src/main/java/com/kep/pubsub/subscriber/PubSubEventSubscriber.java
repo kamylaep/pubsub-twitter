@@ -18,12 +18,14 @@ public class PubSubEventSubscriber implements MessageReceiver {
   private BiConsumer<PubsubMessage, AckReplyConsumer> consumer;
 
   public PubSubEventSubscriber(String projectId, String subscriptionId, BiConsumer<PubsubMessage, AckReplyConsumer> consumer) {
+    logger.debug("Creating publisher with projectId={} and subscriptionId={}", projectId, subscriptionId);
     this.consumer = consumer;
     buildSubscriber(StringUtils.trim(projectId), StringUtils.trim(subscriptionId));
   }
 
   @Override
   public void receiveMessage(PubsubMessage message, AckReplyConsumer ackReplyConsumer) {
+    logger.trace("Consuming message={}", message);
     consumer.accept(message, ackReplyConsumer);
   }
 
