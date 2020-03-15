@@ -41,7 +41,7 @@ public class TwitterClient {
     try {
       while (!twitterClient.isDone()) {
         String tweet = msgQueue.take();
-        logger.trace("Processing twee={}", tweet);
+        logger.trace("Processing tweet={}", tweet);
         callback.accept(tweet);
       }
     } catch (InterruptedException e) {

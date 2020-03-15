@@ -15,7 +15,8 @@ The following system properties must be set to produce data:
     - ACCESS_TOKEN_SECRET
 - App publisher
     - PROJECT_ID
-    - TOPIC_ID
+    - TWEET_TOPIC_ID
+    - USER_TOPIC_ID
     - TWITTER_TERMS
 
 The following system properties must be set to consume data:
@@ -26,6 +27,9 @@ The following system properties must be set to consume data:
 To create the topics and subscriptions, use:
 
 ```shell script
-$ gcloud pubsub topics create twitter-in
-$ gcloud pubsub subscriptions create sub-twitter-in --topic twitter-in
+$ gcloud pubsub topics create twitter-tweet
+$ gcloud pubsub subscriptions create sub-twitter-tweet --topic twitter-tweet
+
+$ gcloud pubsub topics create twitter-user
+$ gcloud pubsub subscriptions create sub-twitter-user --topic twitter-user
 ```
