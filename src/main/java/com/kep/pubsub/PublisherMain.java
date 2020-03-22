@@ -67,6 +67,7 @@ public class PublisherMain {
   private Map<String, String> parseTweetData(JsonObject tweet, Map<String, String> userData) {
     Map<String, String> tweetData = new HashMap<>();
     tweetData.put("user.id", userData.get("user.id"));
+    tweetData.put("id", tweet.get("id_str").getAsString());
     tweetData.put("text", tweet.get("text").getAsString());
     tweetData.put("source", tweet.get("source").getAsString());
     return tweetData;
